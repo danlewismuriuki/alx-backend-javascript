@@ -1,6 +1,6 @@
 export default function updateUniqueItems(maparg) {
   if (!(maparg instanceof Map)) {
-    throw new Error('argument is not a map');
+    throw new Error('Cannot process');
   }
   maparg.forEach((value, key) => {
     if (value === 1) {
