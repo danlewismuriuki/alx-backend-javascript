@@ -1,3 +1,3 @@
 export default function setFromArray(myarray) {
-    return new Set(myarray);
+  return new Set(myarray);
 }
