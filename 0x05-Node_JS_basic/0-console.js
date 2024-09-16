@@ -1,5 +1,5 @@
-function displayMessage(inputwords) {
-    console.log(inputwords)
+function displayMessage(inputWords) {
+  console.log(inputWords);
 }
 
 module.exports = displayMessage;
