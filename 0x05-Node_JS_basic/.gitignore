@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Log files
+*.log
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm/
+
+# Environment variables
+.env
+
+# npm package lock file (optional, can be used to lock dependencies)
+package-lock.json
+
+# Build output
+dist/
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Babel files
+*.babel.json
+
+# Coverage directory used by tools like istanbul
+coverage/
+
