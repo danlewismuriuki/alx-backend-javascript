@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs').promises;
+
 const path = process.argv[2];
 
 const port = 1245;
@@ -44,39 +45,39 @@ async function countStudents(filePath) {
 
 // Create the HTTP server
 const app = http.createServer(async (req, res) => {
-    res.setHeader('Content-Type', 'text/plain'); // Set content type to plain text
+  res.setHeader('Content-Type', 'text/plain'); // Set content type to plain text
 
-    if (req.url === '/') {
-        // Handle root URL
-        res.statusCode = 200;
-        res.end('Hello Holberton School!');
-    } else if (req.url === '/students') {
-        // Handle /students URL
-        res.statusCode = 200;
-        res.write('This is the list of our students\n');
+  if (req.url === '/') {
+    // Handle root URL
+    res.statusCode = 200;
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    // Handle /students URL
+    res.statusCode = 200;
+    res.write('This is the list of our students\n');
 
-        try {
-            // Fetch and write student data
-            const data = await countStudents(path);
-            res.write(data);
-        } catch (error) {
-            // Handle errors
-            res.statusCode = 500;
-            res.write(`Error: ${error.message}`);
-        } finally {
-            // End the response
-            res.end();
-        }
-    } else {
-        // Handle 404 Not Found
-        res.statusCode = 404;
-        res.end('Not Found');
+    try {
+      // Fetch and write student data
+      const data = await countStudents(path);
+      res.write(data);
+    } catch (error) {
+      // Handle errors
+      res.statusCode = 500;
+      res.write(`Error: ${error.message}`);
+    } finally {
+      // End the response
+      res.end();
     }
+  } else {
+    // Handle 404 Not Found
+    res.statusCode = 404;
+    res.end('Not Found');
+  }
 });
 
 // Start the server and listen on port 1245
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+  console.log(`Server is listening on port ${port}`);
 });
 
 module.exports = app; // Export the app
