@@ -39,4 +39,23 @@ describe('calculateNumber', function() {
     assert.strictEqual(calculateNumber(2.499999, 3.49999), 5);
   });
 
+  it('should handle zero values correctly', function() {
+    assert.strictEqual(calculateNumber(0.0, 0.0), 0);
+    assert.strictEqual(calculateNumber(0.4, 0.6), 1);
+  });
+
+  it('should handle negative numbers correctly', function() {
+    assert.strictEqual(calculateNumber(-1.4, -2.0), -3);
+    assert.strictEqual(calculateNumber(-1.6, -2.4), -4);
+  });
+
+  it('should handle large numbers correctly', function() {
+    assert.strictEqual(calculateNumber(1234567.4, 9876543.6), 11111111);
+  });
+
+  it('should handle exact halfway rounding cases', function() {
+    assert.strictEqual(calculateNumber(0.5, 0.5), 2);
+    assert.strictEqual(calculateNumber(1.5, 1.5), 4);
+  });
+
 });
