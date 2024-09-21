@@ -4,9 +4,19 @@ const fs = require('fs').promises;
 const app = express();
 const port = 1245;
 
-async function countStudents(path) {
+app.get('/', (req, res) => {
+    res.send('Hello Holberton School!');
+});
+
+app.get('/students', async (req, res) => {
+    const filepath = process.argv[2];
+    if (!filepath) {
+        return res.status(500).send("Database file not provided");
+    }
+
+    const msg = 'This is the list of our students\n';
     try {
-        const data = await fs.readFile(path, 'utf-8');
+        const data = await fs.readFile(filepath, 'utf-8');
         const lines = data.split('\n').filter((line) => line.trim() !== '');
 
         if (lines.length <= 1) {
@@ -37,26 +47,7 @@ async function countStudents(path) {
             messages.push(message);
         }
 
-        return messages;
-    } catch (error) {
-        throw new Error('Cannot load the database');
-    }
-}
-
-app.get('/', (req, res) => {
-    res.send('Hello Holberton School!');
-});
-
-app.get('/students', async (req, res) => {
-    const filepath = process.argv[2];
-    if (!filepath) {
-        return res.status(500).send("Database file not provided");
-    }
-
-    const msg = 'This is the list of our students\n';
-    try {
-        const students = await countStudents(filepath);
-        res.send(`${msg}${students.join('\n')}`);
+        res.send(`${msg}${messages.join('\n')}`);
     } catch (error) {
         res.send(`${msg}${error.message}`);
     }
@@ -65,3 +56,5 @@ app.get('/students', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+
+module.exports = app;
