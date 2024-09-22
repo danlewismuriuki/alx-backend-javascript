@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
-const fs = require('fs');
+const fs = require('fs').promises;
+const port = 1245;
+
+app.get('/', (req, res) => {
+    res.send('Hello Holberton School!');
+});
 
 app.get('/students', async (req, res) => {
     const filepath = process.argv[2];
@@ -46,3 +51,8 @@ app.get('/students', async (req, res) => {
         return res.send(`${msg}${error.message}`); // Ensure to return the response in case of an error
     }
 });
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
+
